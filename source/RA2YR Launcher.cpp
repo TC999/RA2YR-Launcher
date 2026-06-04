@@ -4,14 +4,14 @@
 // Compile: cl /EHsc /O2 launcher.cpp user32.lib kernel32.lib shell32.lib
 
 #include <windows.h>
-#include <shlwapi.h>
+//#include <shlwapi.h>
 #include <fstream>
 #include <string>
 #include <unordered_map>
 #include <ctime>
 #include <algorithm>
 
-#pragma comment(lib, "shlwapi.lib")
+//#pragma comment(lib, "shlwapi.lib")
 
 // -------------------------------------------------------------------
 // Configuration keys (as observed in original launcher)
