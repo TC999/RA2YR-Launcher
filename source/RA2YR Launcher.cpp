@@ -219,13 +219,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
-    // Step 2: build config file path (exe name without extension + ".lcf")
-    g_configFilePath = g_exePath;
-    auto dotPos = g_configFilePath.rfind('.');
-    auto slashPos = g_configFilePath.rfind('\\');
-    if (dotPos != std::string::npos && (slashPos == std::string::npos || dotPos > slashPos))
-        g_configFilePath.erase(dotPos);
-    g_configFilePath += ".lcf";
+    // Step 2: build config file path (fixed name: ra2md.lcf)
+    g_configFilePath = g_exeDir + "\\ra2md.lcf";
 
     // Step 3: parse .lcf file
     std::unordered_map<std::string, std::string> config;
