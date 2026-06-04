@@ -4,14 +4,14 @@
 // Compile: cl /EHsc /O2 launcher.cpp user32.lib kernel32.lib shell32.lib
 
 #include <windows.h>
-//#include <shlwapi.h>
+#include <shlwapi.h>
 #include <fstream>
 #include <string>
 #include <unordered_map>
 #include <ctime>
 #include <algorithm>
 
-//#pragma comment(lib, "shlwapi.lib")
+#pragma comment(lib, "shlwapi.lib")
 
 // -------------------------------------------------------------------
 // Configuration keys (as observed in original launcher)
@@ -221,7 +221,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Step 2: build config file path (exe name without extension + ".lcf")
     g_configFilePath = g_exePath;
-    PathRemoveExtensionA(g_configFilePath.data());
+    auto dotPos = g_configFilePath.rfind('.');
+    auto slashPos = g_configFilePath.rfind('\\');
+    if (dotPos != std::string::npos && (slashPos == std::string::npos || dotPos > slashPos))
+        g_configFilePath.erase(dotPos);
     g_configFilePath += ".lcf";
 
     // Step 3: parse .lcf file
